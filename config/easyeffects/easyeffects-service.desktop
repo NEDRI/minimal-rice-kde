@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Easy Effects
+Comment=Easy Effects w tle (presety dla BlackShark V3 Pro i mikrofonu)
+Exec=easyeffects --service-mode --hide-window
+Icon=com.github.wwmm.easyeffects
+Terminal=false
+X-GNOME-Autostart-enabled=true
+NoDisplay=true

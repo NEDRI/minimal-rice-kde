@@ -1,0 +1,9 @@
+#!/bin/bash
+# tapety: linkuje wszystkie obrazy z ~/Pictures/Wallpapers do ~/.local/share/wallpapers (lista tapet Plasmy)
+# i usuwa linki do plików, których już nie ma. Uruchamiane też przez updateall (krok "tapety").
+W=~/.local/share/wallpapers; S=~/Pictures/Wallpapers; mkdir -p "$W"
+find "$W" -maxdepth 1 -xtype l -delete
+n=0
+while IFS= read -r f; do rel=${f#$S/}; ln -sfn "$f" "$W/${rel//\//-}"; n=$((n+1)); done < <(
+  find "$S" -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.jxl' \))
+echo "tapety: $n w $W"

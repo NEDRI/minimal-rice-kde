@@ -41,6 +41,18 @@ and the rest from `config/kglobalshortcutsrc`.
 launchers (Steam, Lutris, Heroic, Bottles, Prism Launcher, Sober), music, MATLAB, LibreOffice, EasyEffects,
 System Settings — only the ones installed. **Avatar**: the white CachyOS logo on black.
 
+**Wallpapers** — 27 pictures (`wallpapers/pictures`, go to `~/Pictures/Wallpapers`) and the "Nothing1" wallpaper
+package; `config/wallpapers.ini` says which one is on which screen and on the lock screen (main screen:
+`disco-ruud`, second screen and lock screen: Nothing1). `tapety` links every picture into Plasma's wallpaper list.
+
+**System settings** — JetBrains Mono everywhere, keyboard `us,pl` (euro variant), flat mouse acceleration (and the
+settings of a Razer Basilisk X and a Corsair Scimitar), no automatic screen lock (`Super+L` locks), Firefox as the
+browser and PDF viewer, EasyEffects presets for a BlackShark V3 Pro headset and its microphone (with the LV2
+plugins it needs), zsh with oh-my-zsh and a Starship prompt. The menu icon and the avatar take the distro's logo
+(CachyOS or EndeavourOS); pinned apps that are not installed are left out of the bar.
+
+**Not included** (they belong to one machine): drivers, kernel, scheduler, snapshots, disks, Steam launch options.
+
 ## After updates
 
 Klassy, Better Blur and the rounded corners are KWin plugins built against one KWin version. After a KWin

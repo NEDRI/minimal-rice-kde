@@ -1,0 +1,116 @@
+# Everforest powerline (w stylu presetu Catppuccin Powerline, z kolorami Everforest)
+"$schema" = 'https://starship.rs/config-schema.json'
+add_newline = true
+palette = "slate"
+format = """
+[](green)\
+$os\
+$username\
+[](bg:yellow fg:green)\
+$directory\
+[](fg:yellow bg:aqua)\
+$git_branch\
+$git_status\
+[](fg:aqua bg:blue)\
+$c$rust$golang$nodejs$python$java$kotlin\
+[](fg:blue bg:bg3)\
+$time\
+[ ](fg:bg3)\
+$line_break$character"""
+
+[palettes.slate]
+bg0 = "#111112"
+bg3 = "#26282d"
+fg = "#c8d0d8"
+red = "#d0787c"
+orange = "#d69a7a"
+yellow = "#a9b6c3"
+green = "#c3ccd6"
+aqua = "#8f9fb0"
+blue = "#7a8b9d"
+purple = "#b49ac4"
+
+[palettes.everforest]
+bg0 = "#2d353b"
+bg3 = "#475258"
+fg = "#d3c6aa"
+red = "#e67e80"
+orange = "#e69875"
+yellow = "#dbbc7f"
+green = "#a7c080"
+aqua = "#83c092"
+blue = "#7fbbb3"
+purple = "#d699b6"
+
+[os]
+disabled = false
+style = "bg:green fg:bg0"
+[os.symbols]
+Arch = "󰣇"
+EndeavourOS = ""
+CachyOS = ""
+Linux = "󰌽"
+
+[username]
+show_always = true
+style_user = "bg:green fg:bg0"
+style_root = "bg:green fg:bg0"
+format = '[ $user ]($style)'
+
+[directory]
+style = "bg:yellow fg:bg0"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = ""
+style = "bg:aqua"
+format = '[[ $symbol $branch ](fg:bg0 bg:aqua)]($style)'
+
+[git_status]
+style = "bg:aqua"
+format = '[[($all_status$ahead_behind )](fg:bg0 bg:aqua)]($style)'
+
+[c]
+symbol = " "
+format = '[[ $symbol( $version) ](fg:bg0 bg:blue)]($style)'
+style = "bg:blue"
+[rust]
+symbol = ""
+format = '[[ $symbol( $version) ](fg:bg0 bg:blue)]($style)'
+style = "bg:blue"
+[golang]
+symbol = ""
+format = '[[ $symbol( $version) ](fg:bg0 bg:blue)]($style)'
+style = "bg:blue"
+[nodejs]
+symbol = ""
+format = '[[ $symbol( $version) ](fg:bg0 bg:blue)]($style)'
+style = "bg:blue"
+[python]
+symbol = ""
+format = '[[ $symbol( $version) ](fg:bg0 bg:blue)]($style)'
+style = "bg:blue"
+[java]
+symbol = ""
+format = '[[ $symbol( $version) ](fg:bg0 bg:blue)]($style)'
+style = "bg:blue"
+[kotlin]
+symbol = ""
+format = '[[ $symbol( $version) ](fg:bg0 bg:blue)]($style)'
+style = "bg:blue"
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:bg3"
+format = '[[  $time ](fg:fg bg:bg3)]($style)'
+
+[line_break]
+disabled = false
+
+[character]
+disabled = false
+success_symbol = '[❯](bold fg:green)'
+error_symbol = '[❯](bold fg:red)'

@@ -4,3 +4,5 @@ klassy
 kwin-effects-better-blur-dx
 kwin-effect-rounded-corners-git
 plasma6-applets-panel-colorizer
+# the zsh config uses oh-my-zsh from a package (in CachyOS's repo, in the AUR elsewhere)
+oh-my-zsh-git

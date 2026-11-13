@@ -10,3 +10,16 @@ python
 python-gobject
 git
 curl
+# system settings: browser, sound effects (EasyEffects needs the LV2 plugins or it passes sound through), shell
+firefox
+xdg-utils
+easyeffects
+lsp-plugins-lv2
+calf
+zam-plugins-lv2
+mda.lv2
+zsh
+zsh-autosuggestions
+zsh-syntax-highlighting
+starship
+pacman-contrib

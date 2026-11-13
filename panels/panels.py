@@ -18,15 +18,32 @@ SENSORS = [
     {"General": {"sensorId": "network/all/download", "icon": "\U000f01da", "title": "Download", "unit": "formatted"}},
     {"General": {"sensorId": "network/all/upload", "icon": "\U000f0552", "title": "Upload", "unit": "formatted"}},
 ]
+APP_DIRS = [os.path.expanduser("~/.local/share/applications"), "/var/lib/flatpak/exports/share/applications",
+            os.path.expanduser("~/.local/share/flatpak/exports/share/applications"), "/usr/share/applications"]
+
+
+def installed(desktop_id):
+    return any(os.path.exists(os.path.join(d, desktop_id)) for d in APP_DIRS)
+
+
+# pinned in the bar; the ones not installed on this computer are left out (no empty icons)
 LAUNCHERS = ",".join("applications:" + d for d in (
     "firefox.desktop", "com.microsoft.VSCode.desktop", "org.kde.konsole.desktop", "vesktop.desktop",
-    "com.mastermindzh.tidal-hifi.desktop", "com.anthropic.Claude.desktop", "org.kde.dolphin.desktop"))
+    "com.mastermindzh.tidal-hifi.desktop", "com.anthropic.Claude.desktop", "org.kde.dolphin.desktop") if installed(d))
+
+
+def distro_logo():
+    """The menu icon: the distro's white logo (install.sh copies both into the icon theme)."""
+    try:
+        ids = open("/etc/os-release").read()
+    except OSError:
+        ids = ""
+    return "endeavouros-symbolic" if "endeavouros" in ids else "cachyos-symbolic"
+
 
 layout = {
     "top": [
-        ["org.kde.plasma.kickoff", {"General": {"icon": "cachyos-symbolic", "favoritesPortedToKAstats": True,
-                                                "favorites": "applications:firefox.desktop,applications:com.microsoft.VSCode.desktop,applications:org.kde.konsole.desktop,applications:org.kde.dolphin.desktop,applications:vesktop.desktop,applications:com.anthropic.Claude.desktop,applications:steam.desktop,applications:com.mastermindzh.tidal-hifi.desktop,applications:spotify.desktop,applications:MATLABWindow.desktop,applications:libreoffice-writer.desktop,applications:com.github.wwmm.easyeffects.desktop,applications:systemsettings.desktop"}}],
-        # 2026-11-13: bez pulpitów wirtualnych i bez docka — aplikacje z docka są tu, w górnym pasku
+        ["org.kde.plasma.kickoff", {"General": {"icon": distro_logo(), "favoritesPortedToKAstats": True}}],
         ["org.kde.plasma.icontasks", {"General": {"launchers": LAUNCHERS, "showOnlyCurrentDesktop": False,
                                                   "showOnlyCurrentActivity": False, "iconSpacing": 1}}],
         ["org.kde.plasma.kickerdash", {"General": {"icon": "view-app-grid-symbolic"}}],

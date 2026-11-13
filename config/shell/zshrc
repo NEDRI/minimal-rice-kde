@@ -1,0 +1,36 @@
+# Odtworzone z programs.zsh w configuration.nix (NixOS) - migracja 2026-11.
+# Domyslny .zshrc CachyOS zostal w ~/.zshrc.cachyos-domyslny
+
+# ~/.local/bin: isled, isle-setup-voice, updateall itp.
+export PATH="$HOME/.local/bin:$PATH"
+
+export ZSH=/usr/share/oh-my-zsh
+ZSH_THEME="frontcube"
+plugins=(git npm history node rust deno python)
+ZSH_CACHE_DIR="$HOME/.cache/oh-my-zsh"; mkdir -p "$ZSH_CACHE_DIR"
+source $ZSH/oh-my-zsh.sh
+
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
+
+# rootless docker (na NixOS ustawial to modul virtualisation.docker.rootless)
+export DOCKER_HOST=unix:///run/user/$UID/docker.sock
+
+alias ll='ls -la'
+alias c='clear'
+alias e='exit'
+alias fastfetch='clear && command fastfetch'
+alias n='sudo nvim'
+alias nn='nvim'
+# odpowiedniki aliasow nixos-rebuild / nix-collect-garbage
+alias upgrade='paru -Syu'
+alias update='checkupdates; paru -Qua'
+alias cgen='sudo paccache -rk2 && sudo paccache -ruk0 && paru -c'
+command -v starship >/dev/null && eval "$(starship init zsh)"
+
+# fastfetch greeting with the distro logo (Ghostty only, so editor terminals stay quiet)
+[[ -o interactive && $TERM_PROGRAM == ghostty ]] && command -v fastfetch >/dev/null && fastfetch

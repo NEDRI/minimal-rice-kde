@@ -3,7 +3,7 @@
 # text, light grey selection, dark glass (blur behind windows, menus and the top bar), Klassy window buttons
 # as coloured circles, one top bar per screen with the apps in it, no dock.
 #
-#   ./install.sh                 everything (packages, icons, settings, panels)
+#   ./install.sh                 everything (packages, icons, settings, wallpapers, panels)
 #   ./install.sh --no-packages   skip pacman and the AUR
 #   ./install.sh --no-panels     keep your panels; only colours, windows, shortcuts
 #   ./install.sh --yes           no questions
@@ -54,7 +54,7 @@ fi
 [ -d "$L/icons/Bibata-Modern-Ice" ] || { curl -sfL https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Modern-Ice.tar.xz -o "$T/bibata.tar.xz" && tar -xf "$T/bibata.tar.xz" -C "$L/icons"; }
 [ -d "$L/themes/adw-gtk3-dark" ] || { curl -sfL https://github.com/lassekongo83/adw-gtk3/releases/download/v6.5/adw-gtk3v6.5.tar.xz -o "$T/adw.tar.xz" && tar -xf "$T/adw.tar.xz" -C "$L/themes"; }
 for v in 3.0 4.0; do mkdir -p "$C/gtk-$v"; keep "$C/gtk-$v/gtk.css"; cp "$HERE/config/gtk/gtk.css" "$C/gtk-$v/gtk.css"; done
-cp "$HERE/panels/cachyos-symbolic.svg" "$L/icons/hicolor/scalable/apps/" 2>/dev/null || true
+cp "$HERE"/panels/*-symbolic.svg "$L/icons/hicolor/scalable/apps/"   # CachyOS and EndeavourOS logos
 
 # ---- 3. colours, Plasma style, Konsole ----
 say "Colours (Lorien Black), Breeze style, Konsole"
@@ -82,7 +82,39 @@ qdbus6 org.kde.KWin /KWin reconfigure >/dev/null 2>&1 || true
 say "Shortcuts"
 keep "$C/kglobalshortcutsrc"; cp "$HERE/config/kglobalshortcutsrc" "$C/kglobalshortcutsrc"
 
-# ---- 6. panels, favourites, avatar ----
+# ---- 6. system settings: fonts, keyboard, mouse, no automatic screen lock, Firefox as the browser ----
+say "Fonts (JetBrains Mono), keyboard (us,pl), mouse, screen lock, default browser"
+keep "$C/kxkbrc" "$C/kcminputrc" "$C/kscreenlockerrc" "$C/mimeapps.list"
+python3 -I "$HERE/scripts/merge-ini.py" "$C/kdeglobals" "$HERE/config/kdeglobals-fonts.ini"
+python3 -I "$HERE/scripts/merge-ini.py" "$C/kxkbrc" "$HERE/config/kxkbrc.ini"
+python3 -I "$HERE/scripts/merge-ini.py" "$C/kcminputrc" "$HERE/config/kcminputrc.ini"
+python3 -I "$HERE/scripts/merge-ini.py" "$C/kscreenlockerrc" "$HERE/config/kscreenlockerrc.ini"
+if [ -e /usr/share/applications/firefox.desktop ]; then
+    xdg-settings set default-web-browser firefox.desktop 2>/dev/null || true
+    for t in x-scheme-handler/http x-scheme-handler/https text/html application/xhtml+xml application/pdf; do
+        xdg-mime default firefox.desktop "$t" 2>/dev/null || true
+    done
+    kwriteconfig6 --file kdeglobals --group General --key BrowserApplication firefox.desktop
+fi
+
+# ---- 7. EasyEffects presets (headset + microphone), zsh with Starship ----
+say "EasyEffects presets, zsh + Starship"
+mkdir -p "$L/easyeffects" "$C/autostart"
+cp -a "$HERE/config/easyeffects/input" "$HERE/config/easyeffects/output" "$L/easyeffects/"
+command -v easyeffects >/dev/null && cp "$HERE/config/easyeffects/easyeffects-service.desktop" "$C/autostart/"
+keep "$HOME/.zshrc" "$C/starship.toml"
+cp "$HERE/config/shell/zshrc" "$HOME/.zshrc"; cp "$HERE/config/shell/starship.toml" "$C/starship.toml"
+[ "$(getent passwd "$USER" | cut -d: -f7)" = /bin/zsh ] || [ "$(getent passwd "$USER" | cut -d: -f7)" = /usr/bin/zsh ] ||
+    echo "zsh is not your login shell yet: chsh -s /bin/zsh"
+
+# ---- 8. wallpapers (every screen and the lock screen) ----
+if [[ "${XDG_CURRENT_DESKTOP:-}" == *KDE* ]]; then
+    say "Wallpapers"
+    python3 -I "$HERE/scripts/wallpapers.py"
+    install -Dm755 "$HERE/scripts/tapety" "$HOME/.local/bin/tapety" && "$HOME/.local/bin/tapety"
+fi
+
+# ---- 9. panels, favourites, avatar ----
 if $panels && [[ "${XDG_CURRENT_DESKTOP:-}" == *KDE* ]]; then
     say "Panels (your current ones are replaced), favourites, avatar"
     if ask "Replace the panels?"; then
@@ -95,7 +127,11 @@ if $panels && [[ "${XDG_CURRENT_DESKTOP:-}" == *KDE* ]]; then
         systemctl --user restart plasma-plasmashell.service
     fi
 fi
-cp "$HERE/config/avatar.png" "$HOME/.face.icon"
+# avatar: the distro's white logo on black (CachyOS or EndeavourOS)
+logo="$HERE/panels/cachyos-symbolic.svg"; grep -q endeavouros /etc/os-release 2>/dev/null && logo="$HERE/panels/endeavouros-symbolic.svg"
+magick -background none -density 600 "$logo" -fill white -colorize 100 -resize 150x150 "$T/logo.png" &&
+    magick -size 256x256 xc:black "$T/logo.png" -gravity center -composite -colorspace Gray "$HOME/.face.icon" ||
+    cp "$HERE/config/avatar.png" "$HOME/.face.icon"
 busctl call org.freedesktop.Accounts "/org/freedesktop/Accounts/User$(id -u)" org.freedesktop.Accounts.User \
     SetIconFile s "$HOME/.face.icon" >/dev/null 2>&1 || true
 
