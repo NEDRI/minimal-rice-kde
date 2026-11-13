@@ -1,6 +1,6 @@
 # minimal-rice-kde
 
-KDE Plasma 6 in the colours of [minimal-rice](https://github.com/NEDRI/minimal-rice)'s GNOME look:
+KDE Plasma 6 in the colours of [minimal-rice-gnome](https://github.com/NEDRI/minimal-rice-gnome)'s GNOME look:
 graphite and near-black with white text, light grey selection instead of blue, and **dark glass** —
 the wallpaper blurred behind windows, menus and the top bar. Made on CachyOS for a laptop used as a
 desktop with two screens, where GNOME did not work well.
@@ -18,7 +18,7 @@ saved to `~/minimal-rice-kde-backup-<date>` first.
 
 **Colours** — `Lorien Black` scheme: windows `#0e0e0e`, views `#0b0b0b`, buttons `#161616`, white text,
 selection `#dcdcdc` with dark text. Breeze Plasma style (follows the scheme), Reversal icons (black),
-Bibata Modern Ice cursor, JetBrains Mono, GTK apps in `adw-gtk3-dark` with minimal-rice's near-black `gtk.css`.
+Bibata Modern Ice cursor, JetBrains Mono, GTK apps in `adw-gtk3-dark` with minimal-rice-gnome's near-black `gtk.css`.
 
 **Dark glass** — [Better Blur](https://github.com/xarblu/kwin-effects-better-blur-dx) blurs the wallpaper
 behind every window, menu and panel except Firefox, Ghostty, VLC, mpv and Steam; a KWin rule keeps windows
@@ -31,7 +31,7 @@ colour. [Rounded corners](https://github.com/matinlotfali/KDE-Rounded-Corners) (
 
 **Top bar** (one on every screen, [Panel Colorizer](https://github.com/luisbocanegra/plasma-panel-colorizer)
 for the glass) — left: CachyOS menu with favourites, pinned and running apps, app grid; middle: date and
-24 h clock; right: CPU, RAM, download and upload (the `org.lorien.cpu` widget from minimal-rice), the tray
+24 h clock; right: CPU, RAM, download and upload (the `org.lorien.cpu` widget from minimal-rice-gnome), the tray
 (main screen only) and lock / shut down / restart. No dock and no virtual desktop pager.
 
 **Shortcuts** as in the GNOME look: `Super+B` desktop, `Super+A` overview, `Super+E` Dolphin, `Super+F` maximize
@@ -67,4 +67,4 @@ then log in again.
 | `scripts/plasma-eval.py` | sends a Plasma script over D-Bus (qdbus6 has a 128 KB argument limit) |
 | `scripts/merge-ini.py` | merges the INI fragments into KDE's config files |
 
-License: GPL-3.0-or-later, like minimal-rice.
+License: GPL-3.0-or-later, like minimal-rice-gnome.
