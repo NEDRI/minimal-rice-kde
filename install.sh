@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# minimal-rice-kde: Plasma 6 in the colours of minimal-rice's GNOME look — graphite and near-black, white
+# minimal-rice-kde: Plasma 6 in the colours of minimal-rice-gnome's GNOME look — graphite and near-black, white
 # text, light grey selection, dark glass (blur behind windows, menus and the top bar), Klassy window buttons
 # as coloured circles, one top bar per screen with the apps in it, no dock.
 #
