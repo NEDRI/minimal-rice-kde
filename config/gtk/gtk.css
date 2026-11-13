@@ -1,0 +1,13 @@
+/* lorien: near-black instead of libadwaita grey (backup: ~/rice-backup-2026-10-27/neutral-theme) */
+@define-color window_bg_color #111112;
+@define-color view_bg_color #141415;
+@define-color headerbar_bg_color #111112;
+@define-color headerbar_backdrop_color #111112;
+@define-color sidebar_bg_color #0c0c0d;
+@define-color sidebar_backdrop_color #0c0c0d;
+@define-color secondary_sidebar_bg_color #0e0e0f;
+@define-color card_bg_color rgba(255, 255, 255, 0.05);
+@define-color dialog_bg_color #18181a;
+@define-color popover_bg_color #18181a;
+@define-color thumbnail_bg_color #18181a;
+@import 'colors.css';

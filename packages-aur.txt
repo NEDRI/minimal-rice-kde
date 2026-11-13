@@ -1,0 +1,6 @@
+# From the AUR (paru/yay -S --needed -). The three KWin plugins load only in the KWin version they were
+# built against: rebuild them after every KWin update (paru -S --rebuild <names>), then log in again.
+klassy
+kwin-effects-better-blur-dx
+kwin-effect-rounded-corners-git
+plasma6-applets-panel-colorizer

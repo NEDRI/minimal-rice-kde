@@ -1,0 +1,70 @@
+# minimal-rice-kde
+
+KDE Plasma 6 in the colours of [minimal-rice](https://github.com/NEDRI/minimal-rice)'s GNOME look:
+graphite and near-black with white text, light grey selection instead of blue, and **dark glass** —
+the wallpaper blurred behind windows, menus and the top bar. Made on CachyOS for a laptop used as a
+desktop with two screens, where GNOME did not work well.
+
+```bash
+git clone https://github.com/NEDRI/minimal-rice-kde.git
+cd minimal-rice-kde
+./install.sh
+```
+
+Then log out and back in. Options: `--no-packages`, `--no-panels`, `--yes`. Everything it replaces is
+saved to `~/minimal-rice-kde-backup-<date>` first.
+
+## What you get
+
+**Colours** — `Lorien Black` scheme: windows `#0e0e0e`, views `#0b0b0b`, buttons `#161616`, white text,
+selection `#dcdcdc` with dark text. Breeze Plasma style (follows the scheme), Reversal icons (black),
+Bibata Modern Ice cursor, JetBrains Mono, GTK apps in `adw-gtk3-dark` with minimal-rice's near-black `gtk.css`.
+
+**Dark glass** — [Better Blur](https://github.com/xarblu/kwin-effects-better-blur-dx) blurs the wallpaper
+behind every window, menu and panel except Firefox, Ghostty, VLC, mpv and Steam; a KWin rule keeps windows
+at 97 % (inactive 95 %), games (`steam_app_*`, `*.exe`, gamescope) and Konsole opaque. Konsole: `#0e0e0e`
+at 95 % with its own blur.
+
+**Windows** — [Klassy](https://github.com/paulmcauley/klassy) decoration: the app icon on the left, the title
+centred, minimize / maximize / close as teal, blue and red circles on the right, the title bar in the window
+colour. [Rounded corners](https://github.com/matinlotfali/KDE-Rounded-Corners) (12 px, dark outline).
+
+**Top bar** (one on every screen, [Panel Colorizer](https://github.com/luisbocanegra/plasma-panel-colorizer)
+for the glass) — left: CachyOS menu with favourites, pinned and running apps, app grid; middle: date and
+24 h clock; right: CPU, RAM, download and upload (the `org.lorien.cpu` widget from minimal-rice), the tray
+(main screen only) and lock / shut down / restart. No dock and no virtual desktop pager.
+
+**Shortcuts** as in the GNOME look: `Super+B` desktop, `Super+A` overview, `Super+E` Dolphin, `Super+F` maximize
+and the rest from `config/kglobalshortcutsrc`.
+
+**Favourites** in the menu (`scripts/favorites.py`): browser, editor, terminal, files, Discord, Claude, the game
+launchers (Steam, Lutris, Heroic, Bottles, Prism Launcher, Sober), music, MATLAB, LibreOffice, EasyEffects,
+System Settings — only the ones installed. **Avatar**: the white CachyOS logo on black.
+
+## After updates
+
+Klassy, Better Blur and the rounded corners are KWin plugins built against one KWin version. After a KWin
+update they stop loading until rebuilt:
+
+```bash
+paru -S --rebuild klassy kwin-effects-better-blur-dx kwin-effect-rounded-corners-git
+```
+
+then log in again.
+
+## Files
+
+| Path | What |
+|---|---|
+| `config/color-schemes/LorienBlack.colors` | the colour scheme |
+| `config/klassy/klassyrc` | Klassy (based on its "Eaten Fruits" preset) |
+| `config/kwinrc.ini` | decoration, rounded corners, Better Blur and which effects are on |
+| `config/kwinrule-opacity.ini` | the window opacity rule |
+| `config/konsole/` | Konsole profile and colours |
+| `config/kglobalshortcutsrc` | shortcuts |
+| `config/gtk/gtk.css` | near-black GTK colours |
+| `panels/panels.py`, `panels/colorizer-top.json` | the top bar, generated as a Plasma script |
+| `scripts/plasma-eval.py` | sends a Plasma script over D-Bus (qdbus6 has a 128 KB argument limit) |
+| `scripts/merge-ini.py` | merges the INI fragments into KDE's config files |
+
+License: GPL-3.0-or-later, like minimal-rice.

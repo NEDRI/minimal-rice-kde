@@ -1,0 +1,12 @@
+# From the repositories (pacman -S --needed -). Plasma 6 itself is assumed to be installed.
+plasma-desktop
+kwin
+konsole
+dolphin
+plasma5support
+ttf-jetbrains-mono-nerd
+imagemagick
+python
+python-gobject
+git
+curl
