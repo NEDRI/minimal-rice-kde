@@ -1,0 +1,13 @@
+[Unit]
+Description=Tell when the KWin plugins (Klassy, Better Blur, rounded corners) need a rebuild after a KWin update
+After=plasma-workspace.target
+PartOf=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStartPre=/usr/bin/sleep 20
+ExecStart=%h/.local/bin/kwin-rebuild --check
+SuccessExitStatus=1
+
+[Install]
+WantedBy=plasma-workspace.target

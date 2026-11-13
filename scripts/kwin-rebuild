@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# kwin-rebuild: Klassy, Better Blur and the rounded corners are KWin plugins built against one KWin version;
+# after a KWin update KWin refuses them ("built for a different version") until they are rebuilt.
+#
+#   kwin-rebuild           rebuild them if KWin changed since the last build (or KWin refused one), else nothing
+#   kwin-rebuild --force   rebuild them now
+#   kwin-rebuild --check   only tell: a desktop notification at login (kwin-rebuild-check.service) and exit 1
+#                          when a rebuild is needed
+set -uo pipefail
+PLUGINS=(klassy kwin-effects-better-blur-dx kwin-effect-rounded-corners-git)
+STATE="${XDG_STATE_HOME:-$HOME/.local/state}/minimal-rice-kde/kwin-version"
+mode="${1:-}"
+
+kwin=$(pacman -Q kwin 2>/dev/null | awk '{print $2}')
+built=$(cat "$STATE" 2>/dev/null || true)
+refused=false
+journalctl --user -b --no-pager -o cat 2>/dev/null | grep -q 'was built for a different version of KWin' && refused=true
+
+installed=()
+for p in "${PLUGINS[@]}"; do pacman -Qq "$p" >/dev/null 2>&1 && installed+=("$p"); done
+((${#installed[@]})) || { echo "None of ${PLUGINS[*]} is installed."; exit 0; }
+
+needed=false
+[[ "$mode" == --force ]] && needed=true
+[[ -n "$built" && "$built" != "$kwin" ]] && needed=true
+$refused && needed=true
+if [[ -z "$built" && "$needed" == false ]]; then
+    mkdir -p "$(dirname "$STATE")"; echo "$kwin" > "$STATE"   # first run: remember the current KWin
+    echo "KWin $kwin: plugins up to date."; exit 0
+fi
+
+if ! $needed; then
+    [[ "$mode" == --check ]] || echo "KWin $kwin: plugins up to date."
+    exit 0
+fi
+
+if [[ "$mode" == --check ]]; then
+    msg="KWin was updated to $kwin: window buttons, blur and rounded corners need a rebuild. Run in a terminal: kwin-rebuild"
+    command -v notify-send >/dev/null && notify-send -a "minimal-rice-kde" -i preferences-system-windows \
+        "Rebuild the KWin plugins" "$msg"
+    echo "$msg"; exit 1
+fi
+
+helper=$(command -v paru || command -v yay || true)
+[[ -n "$helper" ]] || { echo "No AUR helper (paru/yay) to rebuild ${installed[*]}." >&2; exit 1; }
+echo "Rebuilding for KWin $kwin: ${installed[*]}"
+"$helper" -S --rebuild --needed --noconfirm "${installed[@]}" || exit 1
+mkdir -p "$(dirname "$STATE")"; echo "$kwin" > "$STATE"
+echo "Done. Log out and back in so KWin loads them."

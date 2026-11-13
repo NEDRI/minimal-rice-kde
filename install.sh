@@ -77,6 +77,11 @@ mkdir -p "$C/klassy"; cp "$HERE/config/klassy/klassyrc" "$C/klassy/klassyrc"
 python3 -I "$HERE/scripts/merge-ini.py" "$C/kwinrc" "$HERE/config/kwinrc.ini"
 python3 -I "$HERE/scripts/merge-ini.py" --rule "$C/kwinrulesrc" "$HERE/config/kwinrule-opacity.ini"
 qdbus6 org.kde.KWin /KWin reconfigure >/dev/null 2>&1 || true
+# after a KWin update these plugins need a rebuild: `kwin-rebuild` does it, a login check sends a notification
+install -Dm755 "$HERE/scripts/kwin-rebuild" "$HOME/.local/bin/kwin-rebuild"
+install -Dm644 "$HERE/config/kwin-rebuild-check.service" "$C/systemd/user/kwin-rebuild-check.service"
+systemctl --user daemon-reload && systemctl --user enable kwin-rebuild-check.service >/dev/null 2>&1 || true
+"$HOME/.local/bin/kwin-rebuild" >/dev/null || true   # remembers the KWin version the plugins were built for
 
 # ---- 5. shortcuts (as in GNOME: Super+B desktop, Super+A overview, Super+E files, Super+F maximize...) ----
 say "Shortcuts"

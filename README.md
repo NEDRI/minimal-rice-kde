@@ -56,13 +56,14 @@ plugins it needs), zsh with oh-my-zsh and a Starship prompt. The menu icon and t
 ## After updates
 
 Klassy, Better Blur and the rounded corners are KWin plugins built against one KWin version. After a KWin
-update they stop loading until rebuilt:
+update they stop loading until rebuilt. At login `kwin-rebuild-check.service` notices it and shows a
+notification; then run
 
 ```bash
-paru -S --rebuild klassy kwin-effects-better-blur-dx kwin-effect-rounded-corners-git
+kwin-rebuild
 ```
 
-then log in again.
+(it rebuilds them with paru or yay, `--force` to rebuild anyway) and log in again.
 
 ## Files
 
