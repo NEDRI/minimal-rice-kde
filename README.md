@@ -41,6 +41,9 @@ and the rest from `config/kglobalshortcutsrc`.
 launchers (Steam, Lutris, Heroic, Bottles, Prism Launcher, Sober), music, MATLAB, LibreOffice, EasyEffects,
 System Settings — only the ones installed. **Avatar**: the white CachyOS logo on black.
 
+**Global theme** — `Lorien Black` (`config/look-and-feel/`) is set as Plasma's light and dark theme, so the
+"Dark Mode" switch in Quick Settings no longer puts Breeze back over the colours, icons and window buttons.
+
 **Wallpapers** — 27 pictures (`wallpapers/pictures`, go to `~/Pictures/Wallpapers`) and the "Nothing1" wallpaper
 package; `config/wallpapers.ini` says which one is on which screen and on the lock screen (main screen:
 `disco-ruud`, second screen and lock screen: Nothing1). `tapety` links every picture into Plasma's wallpaper list.

@@ -1,0 +1,23 @@
+[kdeglobals][General]
+ColorScheme=LorienBlack
+font=JetBrainsMono Nerd Font,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+fixed=JetBrainsMono Nerd Font,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+
+[kdeglobals][Icons]
+Theme=Reversal-black-dark
+
+[kdeglobals][KDE]
+widgetStyle=Breeze
+
+[plasmarc][Theme]
+name=default
+
+[kcminputrc][Mouse]
+cursorTheme=Bibata-Modern-Ice
+cursorSize=24
+
+[kwinrc][org.kde.kdecoration2]
+library=org.kde.klassy
+theme=Klassy
+ButtonsOnLeft=M
+ButtonsOnRight=IAX

@@ -69,6 +69,14 @@ plasma-apply-desktoptheme default >/dev/null
 plasma-apply-cursortheme --size 24 Bibata-Modern-Ice >/dev/null || true
 qdbus6 org.kde.kded6 /GtkConfig org.kde.GtkConfig.setGtkTheme adw-gtk3-dark >/dev/null 2>&1 || true
 kwriteconfig6 --file konsolerc --group "Desktop Entry" --key DefaultProfile Lorien.profile
+# a global theme of its own, also as Plasma's light AND dark theme: the "Dark Mode" switch in Quick Settings
+# would otherwise put Breeze back (colours, icons, window buttons, cursor)
+mkdir -p "$L/plasma/look-and-feel"
+rm -rf "$L/plasma/look-and-feel/org.minimalrice.lorienblack.desktop"
+cp -a "$HERE/config/look-and-feel/org.minimalrice.lorienblack.desktop" "$L/plasma/look-and-feel/"
+for k in LookAndFeelPackage DefaultDarkLookAndFeel DefaultLightLookAndFeel; do
+    kwriteconfig6 --file kdeglobals --group KDE --key "$k" org.minimalrice.lorienblack.desktop
+done
 
 # ---- 4. windows: Klassy, rounded corners, Better Blur, 90-97 % opacity ----
 say "Windows: Klassy buttons, rounded corners, Better Blur, opacity rule"

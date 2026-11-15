@@ -1,0 +1,12 @@
+{
+    "KPlugin": {
+        "Authors": [{ "Name": "NEDRI" }],
+        "Description": "minimal-rice-kde: graphite and near-black, dark glass, Klassy buttons",
+        "Id": "org.minimalrice.lorienblack.desktop",
+        "Name": "Lorien Black",
+        "License": "GPL-3.0-or-later",
+        "Version": "1.0"
+    },
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "X-Plasma-APIVersion": "2"
+}
