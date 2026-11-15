@@ -108,6 +108,12 @@ if [ -e /usr/share/applications/firefox.desktop ]; then
         xdg-mime default firefox.desktop "$t" 2>/dev/null || true
     done
     kwriteconfig6 --file kdeglobals --group General --key BrowserApplication firefox.desktop
+    # Konsole as the terminal everywhere: KDE, xdg-terminal-exec launchers, GTK apps, $TERMINAL
+    kwriteconfig6 --file kdeglobals --group General --key TerminalApplication konsole
+    kwriteconfig6 --file kdeglobals --group General --key TerminalService org.kde.konsole.desktop
+    for f in xdg-terminals.list kde-xdg-terminals.list; do echo org.kde.konsole.desktop > "$C/$f"; done
+    gsettings set org.gnome.desktop.default-applications.terminal exec konsole 2>/dev/null || true
+    mkdir -p "$C/environment.d"; echo TERMINAL=konsole > "$C/environment.d/terminal.conf"
 fi
 
 # ---- 7. EasyEffects presets (headset + microphone), zsh with Starship ----

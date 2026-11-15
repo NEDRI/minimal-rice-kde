@@ -50,7 +50,7 @@ package; `config/wallpapers.ini` says which one is on which screen and on the lo
 
 **System settings** — JetBrains Mono everywhere, keyboard `us,pl` (euro variant), flat mouse acceleration (and the
 settings of a Razer Basilisk X and a Corsair Scimitar), no automatic screen lock (`Super+L` locks), Firefox as the
-browser and PDF viewer, EasyEffects presets for a BlackShark V3 Pro headset and its microphone (with the LV2
+browser and PDF viewer, Konsole as the terminal, EasyEffects presets for a BlackShark V3 Pro headset and its microphone (with the LV2
 plugins it needs), zsh with oh-my-zsh and a Starship prompt. The menu icon and the avatar take the distro's logo
 (CachyOS or EndeavourOS); pinned apps that are not installed are left out of the bar.
 

@@ -32,5 +32,5 @@ alias update='checkupdates; paru -Qua'
 alias cgen='sudo paccache -rk2 && sudo paccache -ruk0 && paru -c'
 command -v starship >/dev/null && eval "$(starship init zsh)"
 
-# fastfetch greeting with the distro logo (Ghostty only, so editor terminals stay quiet)
-[[ -o interactive && $TERM_PROGRAM == ghostty ]] && command -v fastfetch >/dev/null && fastfetch
+# fastfetch greeting with the distro logo (Konsole or Ghostty only, so editor terminals stay quiet)
+[[ -o interactive && ( -n $KONSOLE_VERSION || $TERM_PROGRAM == ghostty ) ]] && command -v fastfetch >/dev/null && fastfetch
