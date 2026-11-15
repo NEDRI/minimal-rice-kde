@@ -54,6 +54,11 @@ browser and PDF viewer, EasyEffects presets for a BlackShark V3 Pro headset and 
 plugins it needs), zsh with oh-my-zsh and a Starship prompt. The menu icon and the avatar take the distro's logo
 (CachyOS or EndeavourOS); pinned apps that are not installed are left out of the bar.
 
+**Steam** — [Adwaita for Steam](https://github.com/tkashkin/Adwaita-for-Steam) through
+[AdwSteamGtk](https://github.com/Foldex/AdwSteamGtk) (Flathub): its "Oled" colours with `config/steam/custom.css`
+on top — the same `#0e0e0e` / `#0b0b0b` greys, light grey accent with dark text, and the window buttons as the
+teal, blue and red circles of Klassy. A Steam update puts the stock look back: `steam-theme` re-applies it.
+
 **Not included** (they belong to one machine): drivers, kernel, scheduler, snapshots, disks, Steam launch options.
 
 ## After updates
@@ -68,6 +73,8 @@ kwin-rebuild
 
 (it rebuilds them with paru or yay, `--force` to rebuild anyway) and log in again.
 
+After a Steam update run `steam-theme` (it does nothing when the theme is still there) and restart Steam.
+
 ## Files
 
 | Path | What |
@@ -81,6 +88,7 @@ kwin-rebuild
 | `config/gtk/gtk.css` | near-black GTK colours |
 | `panels/panels.py`, `panels/colorizer-top.json` | the top bar, generated as a Plasma script |
 | `scripts/plasma-eval.py` | sends a Plasma script over D-Bus (qdbus6 has a 128 KB argument limit) |
+| `config/steam/` | Steam theme: AdwSteamGtk options and the colour overrides |
 | `scripts/merge-ini.py` | merges the INI fragments into KDE's config files |
 
 License: GPL-3.0-or-later, like minimal-rice-gnome.

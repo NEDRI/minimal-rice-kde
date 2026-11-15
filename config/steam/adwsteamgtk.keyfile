@@ -1,0 +1,12 @@
+[io/github/Foldex/AdwSteamGtk]
+prefs-beta-support = false
+color-theme-options = 'Oled'
+no-rounded-corners-switch = false
+window-controls-options = 'MacOS'
+window-controls-layout-options = 'KDE'
+library-sidebar-options = 'Show'
+hide-whats-new-switch = false
+login-qr-options = 'Show'
+accent-color = 'Theme'
+prefs-install-custom-css = true
+

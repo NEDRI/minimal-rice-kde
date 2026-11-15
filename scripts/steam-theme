@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# steam-theme: Steam in the Lorien Black colours (Adwaita for Steam through AdwSteamGtk, the "Oled" base,
+# config/steam/custom.css on top, window buttons as teal / blue / red circles like Klassy).
+# A Steam update puts the stock CSS back; this puts the theme back on.
+#
+#   steam-theme            apply when Steam lost it (or --force: apply anyway)
+#   steam-theme --check    exit 1 when the theme is missing, change nothing
+set -uo pipefail
+APP=io.github.Foldex.AdwSteamGtk
+UI="$HOME/.local/share/Steam/steamui"
+flatpak info "$APP" >/dev/null 2>&1 || { echo "AdwSteamGtk ($APP) is not installed."; exit 0; }
+[ -d "$UI" ] || { echo "No Steam in ~/.local/share/Steam yet: start Steam once."; exit 0; }
+on() { grep -q 'adwaita/config.css' "$UI/css/library.css" 2>/dev/null && [ -f "$UI/adwaita/custom.css" ]; }
+case "${1:-}" in
+    --check) on && exit 0; echo "Steam lost its theme: run steam-theme"; exit 1 ;;
+    --force) ;;
+    *) on && { echo "Steam theme in place."; exit 0; } ;;
+esac
+flatpak run "$APP" -i 2>&1 | grep -vE 'Fontconfig|does not exist' || true
+on || { echo "AdwSteamGtk did not install the theme." >&2; exit 1; }
+pgrep -x steam >/dev/null && echo "Steam theme applied: restart Steam to see it." || echo "Steam theme applied."

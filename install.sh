@@ -120,6 +120,21 @@ cp "$HERE/config/shell/zshrc" "$HOME/.zshrc"; cp "$HERE/config/shell/starship.to
 [ "$(getent passwd "$USER" | cut -d: -f7)" = /bin/zsh ] || [ "$(getent passwd "$USER" | cut -d: -f7)" = /usr/bin/zsh ] ||
     echo "zsh is not your login shell yet: chsh -s /bin/zsh"
 
+# ---- 7b. Steam in the same colours (Adwaita for Steam via AdwSteamGtk + config/steam/custom.css) ----
+if command -v flatpak >/dev/null && { command -v steam >/dev/null || [ -d "$L/Steam" ]; }; then
+    say "Steam theme"
+    APP=io.github.Foldex.AdwSteamGtk; AD="$HOME/.var/app/$APP/config"
+    flatpak info "$APP" >/dev/null 2>&1 || { ask "Install AdwSteamGtk from Flathub (it applies the Steam theme)?" &&
+        flatpak install -y --user flathub "$APP"; } || true
+    if flatpak info "$APP" >/dev/null 2>&1; then
+        keep "$AD/glib-2.0/settings/keyfile" "$AD/AdwSteamGtk/custom.css"
+        install -Dm644 "$HERE/config/steam/adwsteamgtk.keyfile" "$AD/glib-2.0/settings/keyfile"
+        install -Dm644 "$HERE/config/steam/custom.css" "$AD/AdwSteamGtk/custom.css"
+        install -Dm755 "$HERE/scripts/steam-theme" "$HOME/.local/bin/steam-theme"
+        "$HOME/.local/bin/steam-theme" --force || true
+    fi
+fi
+
 # ---- 8. wallpapers (every screen and the lock screen) ----
 if [[ "${XDG_CURRENT_DESKTOP:-}" == *KDE* ]]; then
     say "Wallpapers"

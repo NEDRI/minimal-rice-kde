@@ -1,0 +1,43 @@
+/* minimal-rice-kde: Steam w kolorach Lorien Black (jak schemat Plasmy) + przyciski okna jak w Klassy */
+/* :root:root - wyzsza specyficznosc, bo motyw importuje ten plik PRZED kolorami i przyciskami */
+:root:root
+{
+	--adw-window-bg: #0e0e0e !important;
+	--adw-window-fg: #e8e8e8 !important;
+	--adw-view-bg: #0b0b0b !important;
+	--adw-view-fg: #e8e8e8 !important;
+	--adw-headerbar-bg: #0e0e0e !important;
+	--adw-headerbar-fg: #e8e8e8 !important;
+	--adw-headerbar-backdrop: #0e0e0e !important;
+	--adw-sidebar-bg: #0a0a0a !important;
+	--adw-sidebar-fg: #e8e8e8 !important;
+	--adw-sidebar-backdrop: #0a0a0a !important;
+	--adw-secondary-sidebar-bg: #0a0a0a !important;
+	--adw-secondary-sidebar-fg: #e8e8e8 !important;
+	--adw-secondary-sidebar-backdrop: #0a0a0a !important;
+	--adw-card-bg: rgba(255, 255, 255, 0.05) !important;
+	--adw-popover-bg: #161616 !important;
+	--adw-popover-fg: #e8e8e8 !important;
+	--adw-dialog-bg: #161616 !important;
+	--adw-dialog-fg: #e8e8e8 !important;
+	--adw-thumbnail-bg: #161616 !important;
+
+	/* akcent jasnoszary z ciemnym tekstem, jak zaznaczenie w Plasmie */
+	--adw-accent-bg: #dcdcdc !important;
+	--adw-accent-fg: #111111 !important;
+	--adw-accent: #dcdcdc !important;
+
+	/* kolka: turkus / niebieski / czerwony */
+	--adw-icon-macos-window-minimize: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='6' fill='%232ec4b6'/%3E%3C/svg%3E") !important;
+	--adw-icon-macos-window-minimize-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='6' fill='%235ad6ca'/%3E%3C/svg%3E") !important;
+	--adw-icon-macos-window-minimize-active: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='6' fill='%2324a094'/%3E%3C/svg%3E") !important;
+	--adw-icon-macos-window-maximize: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='6' fill='%234a7cf7'/%3E%3C/svg%3E") !important;
+	--adw-icon-macos-window-maximize-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='6' fill='%237099f9'/%3E%3C/svg%3E") !important;
+	--adw-icon-macos-window-maximize-active: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='6' fill='%233a62c4'/%3E%3C/svg%3E") !important;
+	--adw-icon-macos-window-restore: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='6' fill='%234a7cf7'/%3E%3C/svg%3E") !important;
+	--adw-icon-macos-window-restore-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='6' fill='%237099f9'/%3E%3C/svg%3E") !important;
+	--adw-icon-macos-window-restore-active: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='6' fill='%233a62c4'/%3E%3C/svg%3E") !important;
+	--adw-icon-macos-window-close: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='6' fill='%23ff5c7a'/%3E%3C/svg%3E") !important;
+	--adw-icon-macos-window-close-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='6' fill='%23ff8099'/%3E%3C/svg%3E") !important;
+	--adw-icon-macos-window-close-active: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Ccircle cx='6' cy='6' r='6' fill='%23d94a66'/%3E%3C/svg%3E") !important;
+}
