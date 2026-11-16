@@ -44,6 +44,7 @@ fi
 helper=$(command -v paru || command -v yay || true)
 [[ -n "$helper" ]] || { echo "No AUR helper (paru/yay) to rebuild ${installed[*]}." >&2; exit 1; }
 echo "Rebuilding for KWin $kwin: ${installed[*]}"
-"$helper" -S --rebuild --needed --noconfirm "${installed[@]}" || exit 1
+# --removemake: Klassy's build pulls in the KF5 libraries; without it they stay behind as orphans
+"$helper" -S --rebuild --needed --removemake --noconfirm "${installed[@]}" || exit 1
 mkdir -p "$(dirname "$STATE")"; echo "$kwin" > "$STATE"
 echo "Done. Log out and back in so KWin loads them."
