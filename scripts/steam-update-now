@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# steam-update-now: every installed game gets "Always keep this game updated -> High priority"
+# (AutoUpdateBehavior 2 in appmanifest_*.acf), so Steam updates it at once instead of scheduling it
+# ("Scheduled ... Wednesday 3:55 AM"), and "Background Downloads -> Always allow" (AllowOtherDownloadsWhileRunning 1),
+# so they update while another game is running. Steam must be closed: it keeps the manifests in memory and
+# writes them back. New games start at 0 again; updateall's "steam" step runs this.
+#   steam-update-now            apply
+#   steam-update-now --dry-run  only count what would change
+set -uo pipefail
+S="$HOME/.local/share/Steam"
+[[ "${1:-}" == --dry-run ]] || ! pgrep -x steam >/dev/null || { echo "Steam is running: close it (Steam > Exit) and run this again."; exit 1; }
+mapfile -t libs < <(awk -F'"' '/"path"/{print $4}' "$S/steamapps/libraryfolders.vdf")
+n=0
+for l in "${libs[@]}"; do
+    for f in "$l"/steamapps/appmanifest_*.acf; do
+        [ -f "$f" ] || continue
+        grep -qP '^\t"(AutoUpdateBehavior"\t\t"[01]|AllowOtherDownloadsWhileRunning"\t\t"[02])"' "$f" || continue
+        n=$((n+1))
+        [[ "${1:-}" == --dry-run ]] || sed -i -E -e 's/^(\t"AutoUpdateBehavior"\t\t)"[01]"/\1"2"/' \
+            -e 's/^(\t"AllowOtherDownloadsWhileRunning"\t\t)"[02]"/\1"1"/' "$f"
+    done
+done
+[[ "${1:-}" == --dry-run ]] && echo "$n games to switch to immediate updates + background downloads" || echo "$n games switched to immediate updates + background downloads"

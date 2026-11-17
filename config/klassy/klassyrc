@@ -60,7 +60,7 @@ LockButtonSpacingLeftRight=true
 LockFullHeightButtonSpacingLeftRight=true
 
 [Global]
-LookAndFeelSet=main
+LookAndFeelSet=org.minimalrice.lorienblack.desktop
 
 [TitleBarOpacity]
 BlurTransparentTitleBars=false

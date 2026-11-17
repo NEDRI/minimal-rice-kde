@@ -57,7 +57,10 @@ plugins it needs), zsh with oh-my-zsh and a Starship prompt. The menu icon and t
 **Steam** — [Adwaita for Steam](https://github.com/tkashkin/Adwaita-for-Steam) through
 [AdwSteamGtk](https://github.com/Foldex/AdwSteamGtk) (Flathub): its "Oled" colours with `config/steam/custom.css`
 on top — the same `#0e0e0e` / `#0b0b0b` greys, light grey accent with dark text, and the window buttons as the
-teal, blue and red circles of Klassy. A Steam update puts the stock look back: `steam-theme` re-applies it.
+teal, blue and red circles of Klassy. A Steam update puts the stock look back: `steam-theme` re-applies it. Vulkan shaders are processed on every CPU
+thread but one (`steam_dev.cfg`), and every game is set to update at once ("Immediately download updates",
+"Always allow background downloads") instead of being scheduled: `steam-update-now`, with Steam closed, also for
+games installed later.
 
 **Login screen** — `sddm/lorien-black`, an SDDM theme based on Breeze: the wallpaper blurred under a near-black
 veil, the avatar, password and power buttons on a dark glass card, the clock in the system font. `install.sh` copies

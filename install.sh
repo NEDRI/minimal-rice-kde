@@ -142,6 +142,14 @@ if command -v flatpak >/dev/null && { command -v steam >/dev/null || [ -d "$L/St
         "$HOME/.local/bin/steam-theme" --force || true
     fi
 fi
+# Steam: shaders on every CPU thread but one, games update at once instead of on Steam's schedule
+if command -v steam >/dev/null || [ -d "$L/Steam" ]; then
+    say "Steam: shader threads, immediate game updates"
+    mkdir -p "$L/Steam"
+    echo "unShaderBackgroundProcessingThreads $(( $(nproc) > 1 ? $(nproc) - 1 : 1 ))" > "$L/Steam/steam_dev.cfg"
+    install -Dm755 "$HERE/scripts/steam-update-now" "$HOME/.local/bin/steam-update-now"
+    [ -f "$L/Steam/steamapps/libraryfolders.vdf" ] && { "$HOME/.local/bin/steam-update-now" || true; }
+fi
 
 # ---- 7c. login screen: SDDM with the Lorien Black theme (Breeze-based, blurred wallpaper + near-black glass card) ----
 if pacman -Qq sddm >/dev/null 2>&1; then
