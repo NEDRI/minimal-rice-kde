@@ -59,6 +59,12 @@ plugins it needs), zsh with oh-my-zsh and a Starship prompt. The menu icon and t
 on top — the same `#0e0e0e` / `#0b0b0b` greys, light grey accent with dark text, and the window buttons as the
 teal, blue and red circles of Klassy. A Steam update puts the stock look back: `steam-theme` re-applies it.
 
+**Login screen** — `sddm/lorien-black`, an SDDM theme based on Breeze: the wallpaper blurred under a near-black
+veil, the avatar, password and power buttons on a dark glass card, the clock in the system font. `install.sh` copies
+it to `/usr/share/sddm/themes` and sets it in `/etc/sddm.conf.d/10-kde.conf` (Wayland greeter through KWin);
+"Apply Plasma Settings" in the Login Screen settings brings the colours, font and cursor over. `theme.conf` has
+`dim` (veil) and `cardOpacity`.
+
 **Not included** (they belong to one machine): drivers, kernel, scheduler, snapshots, disks, Steam launch options.
 
 ## After updates

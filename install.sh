@@ -143,6 +143,18 @@ if command -v flatpak >/dev/null && { command -v steam >/dev/null || [ -d "$L/St
     fi
 fi
 
+# ---- 7c. login screen: SDDM with the Lorien Black theme (Breeze-based, blurred wallpaper + near-black glass card) ----
+if pacman -Qq sddm >/dev/null 2>&1; then
+    say "SDDM login theme"
+    if ask "Install the Lorien Black SDDM theme (sudo)?"; then
+        sudo rm -rf /usr/share/sddm/themes/lorien-black
+        sudo cp -r "$HERE/sddm/lorien-black" /usr/share/sddm/themes/lorien-black
+        sudo install -Dm644 "$HERE/sddm/10-kde.conf" /etc/sddm.conf.d/10-kde.conf
+        echo "Then in System Settings > Login Screen (SDDM): Apply Plasma Settings (colours, font, cursor)."
+        systemctl is-enabled sddm >/dev/null 2>&1 || echo "SDDM is installed but not the login manager: sudo systemctl enable sddm (after disabling the current one)"
+    fi
+fi
+
 # ---- 8. wallpapers (every screen and the lock screen) ----
 if [[ "${XDG_CURRENT_DESKTOP:-}" == *KDE* ]]; then
     say "Wallpapers"
