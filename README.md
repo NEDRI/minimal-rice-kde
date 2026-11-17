@@ -45,8 +45,8 @@ System Settings — only the ones installed. **Avatar**: the white CachyOS logo 
 "Dark Mode" switch in Quick Settings no longer puts Breeze back over the colours, icons and window buttons.
 
 **Wallpapers** — 27 pictures (`wallpapers/pictures`, go to `~/Pictures/Wallpapers`) and the "Nothing1" wallpaper
-package; `config/wallpapers.ini` says which one is on which screen and on the lock screen (main screen:
-`disco-ruud`, second screen and lock screen: Nothing1). `tapety` links every picture into Plasma's wallpaper list.
+package; `config/wallpapers.ini` says which one is on which screen and on the lock screen (main screen,
+lock screen and login screen: `disco-ruud`, second screen: Nothing1). `tapety` links every picture into Plasma's wallpaper list.
 
 **System settings** — JetBrains Mono everywhere, keyboard `us,pl` (euro variant), flat mouse acceleration (and the
 settings of a Razer Basilisk X and a Corsair Scimitar), no automatic screen lock (`Super+L` locks), Firefox as the
