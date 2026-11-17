@@ -323,8 +323,11 @@ _launch=Meta+E
 [services][org.kde.konsole.desktop]
 _launch=Ctrl+Alt+T\tMeta+Return
 
+[services][net.local.spectacle-region-gui.desktop]
+_launch=Meta+Shift+S
+
 [services][org.kde.spectacle.desktop]
-RectangularRegionScreenShot=Meta+Shift+S
+RectangularRegionScreenShot=none
 
 [services][systemsettings.desktop]
 _launch=Tools, Tools,\s

@@ -34,7 +34,7 @@ for the glass) — left: CachyOS menu with favourites, pinned and running apps, 
 24 h clock; right: CPU, RAM, download and upload (the `org.lorien.cpu` widget from minimal-rice-gnome), the tray
 (main screen only) and lock / shut down / restart. No dock and no virtual desktop pager.
 
-**Shortcuts** as in the GNOME look: `Super+B` desktop, `Super+A` overview, `Super+E` Dolphin, `Super+F` maximize
+**Shortcuts** as in the GNOME look: `Super+B` desktop, `Super+A` overview, `Super+E` Dolphin, `Super+F` maximize, `Super+Shift+S` a screenshot of a region (then the Spectacle window to annotate and save)
 and the rest from `config/kglobalshortcutsrc`.
 
 **Favourites** in the menu (`scripts/favorites.py`): browser, editor, terminal, files, Discord, Claude, the game

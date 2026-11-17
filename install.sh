@@ -94,6 +94,8 @@ systemctl --user daemon-reload && systemctl --user enable kwin-rebuild-check.ser
 # ---- 5. shortcuts (as in GNOME: Super+B desktop, Super+A overview, Super+E files, Super+F maximize...) ----
 say "Shortcuts"
 keep "$C/kglobalshortcutsrc"; cp "$HERE/config/kglobalshortcutsrc" "$C/kglobalshortcutsrc"
+# Super+Shift+S: pick a region, then the Spectacle window (its own region shortcut only saves in the background)
+install -Dm644 "$HERE/config/net.local.spectacle-region-gui.desktop" "$L/applications/net.local.spectacle-region-gui.desktop"
 
 # ---- 6. system settings: fonts, keyboard, mouse, no automatic screen lock, Firefox as the browser ----
 say "Fonts (JetBrains Mono), keyboard (us,pl), mouse, screen lock, default browser"
