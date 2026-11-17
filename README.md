@@ -45,8 +45,8 @@ System Settings — only the ones installed. **Avatar**: the white CachyOS logo 
 "Dark Mode" switch in Quick Settings no longer puts Breeze back over the colours, icons and window buttons.
 
 **Wallpapers** — 27 pictures (`wallpapers/pictures`, go to `~/Pictures/Wallpapers`) and the "Nothing1" wallpaper
-package; `config/wallpapers.ini` says which one is on which screen and on the lock screen (main screen,
-lock screen and login screen: `disco-ruud`, second screen: Nothing1). `tapety` links every picture into Plasma's wallpaper list.
+package; `config/wallpapers.ini` says which one is on which screen and on the lock screen (main screen
+and login screen: `disco-ruud`, second screen: Nothing1, lock screen: the dark mountains `1920x1080.jpg`). `tapety` links every picture into Plasma's wallpaper list.
 
 **System settings** — JetBrains Mono everywhere, keyboard `us,pl` (euro variant), flat mouse acceleration (and the
 settings of a Razer Basilisk X and a Corsair Scimitar), no automatic screen lock (`Super+L` locks), Firefox as the
@@ -64,6 +64,12 @@ veil, the avatar, password and power buttons on a dark glass card, the clock in 
 it to `/usr/share/sddm/themes` and sets it in `/etc/sddm.conf.d/10-kde.conf` (Wayland greeter through KWin);
 "Apply Plasma Settings" in the Login Screen settings brings the colours, font and cursor over. `theme.conf` has
 `dim` (veil) and `cardOpacity`.
+
+**Lock screen** — `lockscreen/org.minimalrice.lockscreen`, a Plasma shell package that holds only the lock screen:
+a big thin clock with the weekday and date on the left, a dark glass column on the right with the avatar, password,
+media controls and Sleep / Switch User. Everything else falls back to Plasma's own shell. KWin starts the lock
+screen, so a drop-in for `plasma-kwin_wayland.service` sets `PLASMA_DEFAULT_SHELL` for it alone (plasmashell keeps
+its shell); it takes effect after logging in again. Remove the drop-in to get Breeze's lock screen back.
 
 **Not included** (they belong to one machine): drivers, kernel, scheduler, snapshots, disks, Steam launch options.
 

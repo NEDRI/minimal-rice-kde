@@ -1,0 +1,12 @@
+{
+    "KPackageStructure": "Plasma/Shell",
+    "KPlugin": {
+        "Authors": [{ "Name": "NEDRI" }],
+        "Description": "minimal-rice-kde lock screen only: big clock on the left, a dark glass column with the login on the right. Everything else falls back to org.kde.plasma.desktop.",
+        "Id": "org.minimalrice.lockscreen",
+        "License": "GPL-2.0-or-later",
+        "Name": "Lorien Black lock screen",
+        "Version": "1.0"
+    },
+    "X-Plasma-APIVersion": "2"
+}

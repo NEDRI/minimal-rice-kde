@@ -155,6 +155,14 @@ if pacman -Qq sddm >/dev/null 2>&1; then
     fi
 fi
 
+# ---- 7d. lock screen layout: big clock on the left, dark glass column with the login on the right ----
+say "Lock screen layout"
+rm -rf "$L/plasma/shells/org.minimalrice.lockscreen"; mkdir -p "$L/plasma/shells"
+cp -r "$HERE/lockscreen/org.minimalrice.lockscreen" "$L/plasma/shells/"
+# KWin starts the lock screen; the variable reaches only KWin and its children, not plasmashell
+install -Dm644 "$HERE/config/systemd/kwin-lockscreen.conf" "$C/systemd/user/plasma-kwin_wayland.service.d/lockscreen.conf"
+systemctl --user daemon-reload 2>/dev/null || true
+
 # ---- 8. wallpapers (every screen and the lock screen) ----
 if [[ "${XDG_CURRENT_DESKTOP:-}" == *KDE* ]]; then
     say "Wallpapers"
