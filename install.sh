@@ -83,7 +83,19 @@ say "Windows: Klassy buttons, rounded corners, Better Blur, opacity rule"
 keep "$C/kwinrc" "$C/kwinrulesrc" "$C/klassy/klassyrc"
 mkdir -p "$C/klassy"; cp "$HERE/config/klassy/klassyrc" "$C/klassy/klassyrc"
 python3 -I "$HERE/scripts/merge-ini.py" "$C/kwinrc" "$HERE/config/kwinrc.ini"
-python3 -I "$HERE/scripts/merge-ini.py" --rule "$C/kwinrulesrc" "$HERE/config/kwinrule-opacity.ini"
+# window opacity (97 % / 95 %) as a KWin script, not a window rule: a rule cannot tell games apart, so fullscreen
+# games were see-through. The script keeps fullscreen and screen-filling windows opaque.
+rm -rf "$L/kwin/scripts/lorien-opacity"; mkdir -p "$L/kwin/scripts"; cp -r "$HERE/kwin/lorien-opacity" "$L/kwin/scripts/"
+kwriteconfig6 --file kwinrc --group Plugins --key lorien-opacityEnabled true
+python3 -I - "$C/kwinrulesrc" <<'PY' || true   # drop the old rule from earlier installs
+import re, sys
+p = sys.argv[1]
+try: s = open(p).read()
+except FileNotFoundError: sys.exit()
+s = re.sub(r"\[lorien-black-opacity\].*?(?=\n\[|\Z)", "", s, flags=re.S)
+s = re.sub(r"^(Order=.*)$", lambda m: ",".join(x for x in m.group(1).split(",") if x != "lorien-black-opacity"), s, flags=re.M)
+open(p, "w").write(s.strip() + "\n")
+PY
 qdbus6 org.kde.KWin /KWin reconfigure >/dev/null 2>&1 || true
 # after a KWin update these plugins need a rebuild: `kwin-rebuild` does it, a login check sends a notification
 install -Dm755 "$HERE/scripts/kwin-rebuild" "$HOME/.local/bin/kwin-rebuild"

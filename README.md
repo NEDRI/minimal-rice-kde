@@ -97,7 +97,7 @@ After a Steam update run `steam-theme` (it does nothing when the theme is still 
 | `config/color-schemes/LorienBlack.colors` | the colour scheme |
 | `config/klassy/klassyrc` | Klassy (based on its "Eaten Fruits" preset) |
 | `config/kwinrc.ini` | decoration, rounded corners, Better Blur and which effects are on |
-| `config/kwinrule-opacity.ini` | the window opacity rule |
+| `kwin/lorien-opacity/` | KWin script: windows 97 % / 95 %, fullscreen and screen-filling windows (games, video) opaque |
 | `config/konsole/` | Konsole profile and colours |
 | `config/kglobalshortcutsrc` | shortcuts |
 | `config/gtk/gtk.css` | near-black GTK colours |
